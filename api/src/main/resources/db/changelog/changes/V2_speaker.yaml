@@ -1,0 +1,39 @@
+databaseChangeLog:
+    - changeSet:
+        id: 2
+        author: eloy
+        changes:
+            - createTable:
+                tableName: speaker
+                columns:
+                    - column:
+                        name: id
+                        type: bigint
+                        constraints:
+                            primaryKey: true
+                            nullable: false
+                    - column:
+                        name: first_name
+                        type: varchar(256)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: last_name
+                        type: varchar(256)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: country_id
+                        type: bigint
+                        constraints:
+                            foreignKeyName: fk_speaker_country
+                            references: country(id)
+                            nullable: false
+                            onDelete: CASCADE
+            - loadData:
+                encoding: UTF-8
+                file: ./data/V2_speakers.csv
+                relativeToChangelogFile: true
+                separator: ','
+                tableName: speaker
+

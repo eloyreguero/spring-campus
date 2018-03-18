@@ -10,9 +10,8 @@ buildscript {
     }
 }
 
-
 allprojects {
-
+    
     repositories {
         mavenLocal()
     }
@@ -23,7 +22,10 @@ allprojects {
 }
 
 project(':api') {
-
+    apply plugin: 'war'
+    war {
+        baseName = 'spring-campus'
+    }
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
@@ -41,8 +43,8 @@ project(':api') {
     }
 
     dependencies {
-        compile('org.springframework.cloud:spring-cloud-starter-oauth2')
-        compile('org.springframework.cloud:spring-cloud-starter-security')
+//        compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+//        compile('org.springframework.cloud:spring-cloud-starter-security')
         compile('org.springframework.boot:spring-boot-starter-web')
         compile('org.springframework.boot:spring-boot-starter-data-jpa')
         runtime('com.h2database:h2')

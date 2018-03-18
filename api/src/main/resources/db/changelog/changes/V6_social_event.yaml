@@ -1,0 +1,39 @@
+databaseChangeLog:
+    - changeSet:
+        id: 6
+        author: eloy
+        changes:
+            - createTable:
+                tableName: social_event
+                columns:
+                    - column:
+                        name: id
+                        type: bigint
+                        constraints:
+                            primaryKey: true
+                            nullable: false
+                    - column:
+                        name: description
+                        type: varchar(2048)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: venue
+                        type: varchar(2048)
+                        constraints:
+                            nullable: false
+                    - column:
+                          name: time_slot_id
+                          type: bigint
+                          constraints:
+                              foreignKeyName: fk_social_event_time_slot
+                              references: time_slot(id)
+                              nullable: false
+                              onDelete: CASCADE
+            - loadData:
+                encoding: UTF-8
+                file: ./data/V6_social_events.csv
+                relativeToChangelogFile: true
+                separator: ','
+                tableName: social_event
+

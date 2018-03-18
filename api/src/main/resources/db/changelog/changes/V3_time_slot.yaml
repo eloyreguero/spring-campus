@@ -1,0 +1,31 @@
+databaseChangeLog:
+    - changeSet:
+        id: 3
+        author: eloy
+        changes:
+            - createTable:
+                tableName: time_slot
+                columns:
+                    - column:
+                        name: id
+                        type: bigint
+                        constraints:
+                            primaryKey: true
+                            nullable: false
+                    - column:
+                        name: start
+                        type: datetime
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: end
+                        type: datetime
+                        constraints:
+                            nullable: false
+            - loadData:
+                encoding: UTF-8
+                file: ./data/V3_time_slots.csv
+                relativeToChangelogFile: true
+                separator: ','
+                tableName: time_slot
+

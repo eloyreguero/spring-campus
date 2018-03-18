@@ -1,0 +1,47 @@
+databaseChangeLog:
+    - changeSet:
+        id: 4
+        author: eloy
+        changes:
+            - createTable:
+                tableName: contribution
+                columns:
+                    - column:
+                        name: id
+                        type: bigint
+                        constraints:
+                            primaryKey: true
+                            nullable: false
+                    - column:
+                        name: title
+                        type: varchar(256)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: description
+                        type: varchar(2048)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: author_id
+                        type: bigint
+                        constraints:
+                            foreignKeyName: fk_contribution_author
+                            references: speaker(id)
+                            nullable: false
+                            onDelete: CASCADE
+                    - column:
+                          name: time_slot_id
+                          type: bigint
+                          constraints:
+                              foreignKeyName: fk_contribution_time_slot
+                              references: time_slot(id)
+                              nullable: false
+                              onDelete: CASCADE
+            - loadData:
+                encoding: UTF-8
+                file: ./data/V4_contributions.csv
+                relativeToChangelogFile: true
+                separator: ','
+                tableName: contribution
+
